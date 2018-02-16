@@ -8,16 +8,20 @@
     <title>The AJAXson 5</title>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
+    <style>
+    .error-message {
+        color: red;
+    }
+    </style>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="request-gif.js"></script>
 
 </head>
 <body>
-<div class='container'>    
+<div class='container-fluid'>    
     
-    <header class='jumbotron'>
+    <header class='jumbotron' style="text-align: center">
         <h1>The AJAXson 5</h1>
     </header>
     
@@ -30,10 +34,12 @@
             
             <div class="well well-lg">
                 <label>Prove you are not a robot by filling in this sentence:</label>
-                <div class="input-group">
+                <div class="input-group" id="riddle-form">
                     <input id="riddle" type="text" class="form-control" placeholder="Answer">
                     <span class="input-group-addon">... Jacksons are better than 1.</span>
                 </div>
+                <label class="error-message"></label>
+                <!-- <img src="http://i.imgur.com/8mpVKID.gif"/> -->
             </div>
 
             <input type="submit" class="btn btn-primary" id="button" value="Get My Gif!">
@@ -42,13 +48,13 @@
 
     </article>
     
-    <div class="row">
-        <hr>
-        
-        <img class="img responsive center-block" id="gif" src="" hidden="true"/>
-        <p id="feedback" hidden="true"></p>
-        
-    </div>
+    
+    <hr>
+    
+    <img class="img responsive center-block" style="margin-bottom:20px" id="gif" src="" hidden="true"/>
+    <p id="feedback" hidden="true"></p>
+   
+    
 </div>
 </body>
 </html>

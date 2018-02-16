@@ -17,20 +17,32 @@ function fetchAndDisplayGif(event) {
     // This prevents the form submission from doing what it normally does: send a request (which would cause our page to refresh).
     // Because we will be making our own AJAX request, we dont need to send a normal request and we definitely don't want the page to refresh.
     event.preventDefault();
+
+    clearError();
     
     // get the user's input text from the DOM
     var searchQuery = $('#tag').val(); // TODO should be e.g. "dance"
+    var riddleAnswer = $("#riddle").val();
+        
     
-    // configure a few parameters to attach to our request
+    // if they didn't fill in the sentence, yell at them to do so
+    if (riddleAnswer == ""){
+        displayError("You must first complete the sentence!");
+        return;
+    } else if (riddleAnswer != "5"){
+        displayError("No GIFS for you!");
+        return;
+    } else {
+        // configure a few parameters to attach to our request
     var params = { 
         api_key: "dc6zaTOxFJmzC", 
-        tag : " jackson 5" + searchQuery, // TODO should be e.g. "jackson 5 dance"
+        tag : " jackson 5" + searchQuery, //  should be e.g. "jackson 5 dance"
     };
     
-    var rootURL = "https://api.giphy.com/v1/gifs/random"
+    var rootURL = "https://api.giphy.com/v1/gifs/random";
     // make an ajax request for a random GIF
     $.ajax({
-        url: rootURL, // TODO where should this request be sent?
+        url: rootURL, // where should this request be sent?
         data: params, // attach those extra parameters onto the request
         success: function(response) {
             // if the response comes back successfully, the code in here will execute.
@@ -42,7 +54,7 @@ function fetchAndDisplayGif(event) {
             
             setGifLoadedStatus(true);
             
-            // TODO
+            
             // 1. set the source attribute of our image to the image_url of the GIF
             // 2. hide the feedback message and display the image
         },
@@ -54,12 +66,24 @@ function fetchAndDisplayGif(event) {
             setGifLoadedStatus(false);
         }
     });
+            
+}
     
-    // TODO
     // give the user a "Loading..." message while they wait
     
 }
+// display error message on the riddle text input, style it red
+function displayError(message) {
+    $("#riddle-form").addClass("has-error");
+    $(".error-message").text(message);
+    $
+}
 
+// removes error red styling and error message 
+function clearError(message) {
+    $("#riddle-form").removeClass("has-error");
+    $(".error-message").text("");
+}
 
 /**
  * toggles the visibility of UI elements based on whether a GIF is currently loaded.
